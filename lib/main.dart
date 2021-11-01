@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './transaction.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,13 +33,72 @@ class MyHomePage extends StatelessWidget {
             width: double.infinity,
             child: Card(
               color: Colors.blue,
-              child: Text('CHART'),
+              child: Text(
+                'CHART',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Add Transaction',
+                        style: TextStyle(color: Colors.purpleAccent),
+                      ))
+                ],
+              ),
             ),
           ),
           Column(
             children: transactions.map((tx) {
               return Card(
-                child: Text(tx.title),
+                elevation: 3,
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.purpleAccent, width: 2)),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                      child: Text(
+                        '\$${tx.amount}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.purpleAccent),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          tx.title,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        Text(
+                          DateFormat.yMMMEd().format(tx.date),
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               );
             }).toList(),
           ),
