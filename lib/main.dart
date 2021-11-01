@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import './transaction.dart';
 import 'package:intl/intl.dart';
@@ -14,13 +16,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactions = [
     Transaction(
         id: 'order1', title: 'Shoes', amount: 90.21, date: DateTime.now()),
     Transaction(
         id: 'order2', title: 'Clothes', amount: 34.21, date: DateTime.now()),
   ];
+
+  String titleInput;
+
+  String amountInput;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,12 +60,21 @@ class MyHomePage extends StatelessWidget {
                 children: [
                   TextField(
                     decoration: InputDecoration(labelText: 'Title'),
+                    onChanged: (val) {
+                      titleInput = val;
+                    },
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: 'Amount'),
+                    onChanged: (val) {
+                      amountInput = val;
+                    },
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print(titleInput);
+                        print(amountInput);
+                      },
                       child: Text(
                         'Add Transaction',
                         style: TextStyle(color: Colors.purpleAccent),
