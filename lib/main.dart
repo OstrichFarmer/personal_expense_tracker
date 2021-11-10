@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'flutter app',
       home: MyHomePage(),
-      theme: ThemeData(primarySwatch: Colors.purple, accentColor: Colors.amber),
+      theme: ThemeData(
+          primarySwatch: Colors.purple,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand'),
     );
   }
 }
