@@ -21,8 +21,19 @@ class MyHomePage extends StatelessWidget {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+        ),
         appBar: AppBar(
           title: Text('Expense Tracker'),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.add),
+            ),
+          ],
         ),
         body: ListView(
           children: [
