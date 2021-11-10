@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'flutter app',
       home: MyHomePage(),
+      theme: ThemeData(primarySwatch: Colors.purple, accentColor: Colors.amber),
     );
   }
 }
@@ -74,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   'CHART',
                   textAlign: TextAlign.center,
