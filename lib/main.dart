@@ -13,9 +13,15 @@ class MyApp extends StatelessWidget {
       title: 'flutter app',
       home: MyHomePage(),
       theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.amber,
-          fontFamily: 'Quicksand'),
+        primarySwatch: Colors.purple,
+        fontFamily: 'Quicksand',
+        appBarTheme: AppBarTheme(
+          toolbarTextStyle: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 25),
+        ),
+      ),
     );
   }
 }
@@ -65,7 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Icon(Icons.add),
         ),
         appBar: AppBar(
-          title: Text('Expense Tracker'),
+          title: Text(
+            'Expense Tracker',
+            style: AppBarTheme.of(context).toolbarTextStyle,
+          ),
           actions: [
             IconButton(
               onPressed: () => _startAddNewTransaction(context),
