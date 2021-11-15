@@ -4,9 +4,10 @@ import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 
 class Chart extends StatelessWidget {
-  const Chart({Key key, this.recentTransactions}) : super(key: key);
+  // const Chart(List<Transaction> recentTransactions, {Key key, this.recentTransactions}) : super(key: key);
 
   final List<Transaction> recentTransactions;
+  Chart(this.recentTransactions);
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
@@ -22,14 +23,15 @@ class Chart extends StatelessWidget {
           totalSum += recentTransactions[i].amount;
         }
       }
-      print(DateFormat.E(weekDay));
+      print(DateFormat.E().format(weekDay));
       print(totalSum);
-      return {'days': DateFormat.E(weekDay), 'amount': totalSum};
+      return {'days': DateFormat.E().format(weekDay), 'amount': totalSum};
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print(groupedTransactionValues);
     return Card(
       elevation: 5,
       margin: EdgeInsets.all(20),
