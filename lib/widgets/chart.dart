@@ -23,20 +23,25 @@ class Chart extends StatelessWidget {
           totalSum += recentTransactions[i].amount;
         }
       }
-      print(DateFormat.E().format(weekDay));
-      print(totalSum);
-      return {'days': DateFormat.E().format(weekDay), 'amount': totalSum};
+      // print(DateFormat.E().format(weekDay).substring(0, 1));
+      // print(totalSum);
+      return {
+        'days': DateFormat.E().format(weekDay).substring(0, 1),
+        'amount': totalSum
+      };
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print(groupedTransactionValues);
+    // print(groupedTransactionValues);
     return Card(
       elevation: 5,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: [],
+        children: groupedTransactionValues.map((data) {
+          return Text('${data['days']}: ${data['amount']}');
+        }).toList(),
       ),
     );
   }
