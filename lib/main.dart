@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:personal_expense_tracker/widgets/chart.dart';
@@ -118,10 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _startAddNewTransaction(context),
-          child: Icon(Icons.add),
-        ),
+        floatingActionButton: Platform.isIOS
+            ? Container()
+            : FloatingActionButton(
+                onPressed: () => _startAddNewTransaction(context),
+                child: Icon(Icons.add),
+              ),
         appBar: appbar,
         body: ListView(
           children: [
@@ -130,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Show Chart'),
-                  Switch(
+                  Switch.adaptive(
                     value: _showChart,
                     onChanged: (bool value) {
                       setState(() {
