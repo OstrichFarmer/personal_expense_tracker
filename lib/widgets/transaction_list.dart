@@ -14,17 +14,18 @@ class TransactionList extends StatelessWidget {
               children: [
                 Text(
                   'No transactions added',
-                  style: AppBarTheme.of(context).toolbarTextStyle,
+                  style: Theme.of(context).textTheme.caption,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                    height: constraints.maxHeight * 0.6,
-                    child: Image.asset(
-                      'assets/images/waiting.png',
-                      fit: BoxFit.cover,
-                    ))
+                  height: constraints.maxHeight * 0.6,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ],
             );
           })
