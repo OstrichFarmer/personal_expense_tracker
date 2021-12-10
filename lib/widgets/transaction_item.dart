@@ -33,7 +33,7 @@ class TransactionItem extends StatelessWidget {
           style: Theme.of(context).textTheme.caption,
         ),
         subtitle: Text(DateFormat.yMMMd().format(transaction.date)),
-        trailing: MediaQuery.of(context).size.width > 400
+        trailing: MediaQuery.of(context).size.width > 450
             ? TextButton.icon(
                 onPressed: () => deleteTx(transaction.id),
                 icon: Icon(

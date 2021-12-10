@@ -89,11 +89,58 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<Widget> _buildLandscapeContent(
+      MediaQueryData mediaquery, appbar, Widget txListWidget) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Show Chart',
+            style: Theme.of(context).textTheme.caption,
+          ),
+          Switch.adaptive(
+            value: _showChart,
+            onChanged: (bool value) {
+              setState(() {
+                _showChart = value;
+              });
+            },
+          )
+        ],
+      ),
+      _showChart
+          ? Container(
+              height: (mediaquery.size.height -
+                      appbar.preferredSize.height -
+                      mediaquery.padding.top) *
+                  0.7,
+              child: Chart(_recentTransactions),
+            )
+          : txListWidget
+    ];
+  }
+
+  List<Widget> _buildPortraitContent(
+      MediaQueryData mediaquery, appbar, Widget txListWidget) {
+    return [
+      Container(
+        height: (mediaquery.size.height -
+                appbar.preferredSize.height -
+                mediaquery.padding.top) *
+            0.3,
+        child: Chart(_recentTransactions),
+      ),
+      txListWidget
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaquery = MediaQuery.of(context);
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+
     final PreferredSizeWidget appbar = Platform.isIOS
         ? CupertinoNavigationBar(
             middle: Text(
@@ -133,42 +180,9 @@ class _MyHomePageState extends State<MyHomePage> {
     final pageBody = ListView(
       children: [
         if (isLandscape)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Show Chart',
-                style: Theme.of(context).textTheme.caption,
-              ),
-              Switch.adaptive(
-                value: _showChart,
-                onChanged: (bool value) {
-                  setState(() {
-                    _showChart = value;
-                  });
-                },
-              )
-            ],
-          ),
+          ..._buildLandscapeContent(mediaquery, appbar, txListWidget),
         if (!isLandscape)
-          Container(
-            height: (mediaquery.size.height -
-                    appbar.preferredSize.height -
-                    mediaquery.padding.top) *
-                0.3,
-            child: Chart(_recentTransactions),
-          ),
-        if (!isLandscape) txListWidget,
-        if (isLandscape)
-          _showChart
-              ? Container(
-                  height: (mediaquery.size.height -
-                          appbar.preferredSize.height -
-                          mediaquery.padding.top) *
-                      0.7,
-                  child: Chart(_recentTransactions),
-                )
-              : txListWidget,
+          ..._buildPortraitContent(mediaquery, appbar, txListWidget),
       ],
     );
     return GestureDetector(
